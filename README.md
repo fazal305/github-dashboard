@@ -1,5 +1,7 @@
 # GitHub Dashboard
 
+**🔗 Live demo: [fazal305.github.io/github-dashboard](https://fazal305.github.io/github-dashboard/)**
+
 A professional developer platform for exploring GitHub data — users, repositories, languages, organizations, and activity — built as a modular React + Vite single-page application.
 
 This isn't a simple GitHub profile viewer. It's architected as a real SaaS-style product: a fully token-driven design system with light/dark/auto theming and user-selectable accent colors, a resilient API layer with retry and rate-limit handling, persisted search history and settings, and 14 fully data-backed pages, all verified against the live GitHub REST API rather than mocked data.
@@ -110,7 +112,7 @@ No environment variables or build-time configuration are required — the app wo
 
 ## Deployment
 
-This project is configured for **GitHub Pages**:
+Deployed on **GitHub Pages** at **[fazal305.github.io/github-dashboard](https://fazal305.github.io/github-dashboard/)**. To redeploy after making changes:
 
 ```bash
 npm run deploy
@@ -122,7 +124,7 @@ That builds the app and pushes `dist/` to a `gh-pages` branch via the `gh-pages`
 - `App.jsx` passes `basename={import.meta.env.BASE_URL}` to `BrowserRouter` so routes resolve under that subpath
 - `public/404.html` + a small decode script in `index.html` implement the standard [spa-github-pages](https://github.com/rafgraph/spa-github-pages) redirect trick, so a direct load of e.g. `/github-dashboard/users` (not just `/`) works instead of 404ing
 
-After the first `npm run deploy`, enable Pages in the repo's Settings → Pages → set the source to the `gh-pages` branch. The site will be live at `https://<your-username>.github.io/github-dashboard/`.
+(Pages is already enabled on this repo, sourced from the `gh-pages` branch — Settings → Pages, if you need to check or change it.)
 
 If you rename the repository, update the `base` in `vite.config.js` and `segmentsToKeep`-relative path in `public/404.html` to match.
 
