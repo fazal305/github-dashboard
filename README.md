@@ -52,14 +52,6 @@ github-dashboard/
 
 Every component folder follows the same shape: `ComponentName.jsx` (implementation) + `index.js` (barrel export), so imports read as `components/UserCard` rather than reaching into implementation files.
 
-## Screenshots
-
-> _Add screenshots here before publishing — e.g. Dashboard (light + dark), User Profile, Language Analytics with chart, Compare Users, Repository Explorer table view, Settings._
-
-| Dashboard | User Profile | Language Analytics |
-| --- | --- | --- |
-| _screenshot_ | _screenshot_ | _screenshot_ |
-
 ## Technologies Used
 
 - **[React 19](https://react.dev/)** + **[Vite](https://vite.dev/)** — UI rendering, component state, application logic
