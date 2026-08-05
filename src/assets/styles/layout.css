@@ -1,0 +1,182 @@
+/* ==========================================================================
+   App shell layout: the dashboard grid (sidebar / navbar / main / footer),
+   its responsive collapse behavior, and page-level containers.
+   Component-level visuals (cards, badges, etc.) live in components.css.
+   ========================================================================== */
+
+.gd-app-shell {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: var(--navbar-height) 1fr auto;
+  grid-template-areas:
+    'sidebar navbar'
+    'sidebar main'
+    'sidebar footer';
+  transition: grid-template-columns var(--duration-base) var(--ease-standard);
+}
+
+.gd-app-shell.gd-sidebar-collapsed {
+  grid-template-columns: var(--sidebar-width-collapsed) 1fr;
+}
+
+.gd-app-navbar {
+  grid-area: navbar;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  height: var(--navbar-height);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.gd-app-sidebar {
+  grid-area: sidebar;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sidebar);
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+}
+
+.gd-app-main {
+  grid-area: main;
+  min-width: 0;
+  padding: var(--space-6) var(--container-padding-x) var(--space-12);
+}
+
+.gd-app-footer {
+  padding: var(--space-4) var(--container-padding-x);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.gd-sidebar-backdrop {
+  display: none;
+}
+
+/* ---- Responsive: collapse the sidebar to an off-canvas drawer below `lg` ---- */
+@media (max-width: 991.98px) {
+  .gd-app-shell {
+    grid-template-columns: 0 1fr;
+    grid-template-areas:
+      'navbar navbar'
+      'main main'
+      'footer footer';
+  }
+
+  .gd-app-sidebar {
+    position: fixed;
+    inset-block: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-xl);
+    transition: transform var(--duration-base) var(--ease-standard);
+  }
+
+  .gd-app-shell.gd-sidebar-open .gd-app-sidebar {
+    transform: translateX(0);
+  }
+
+  .gd-app-shell.gd-sidebar-open .gd-sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: calc(var(--z-sidebar) - 1);
+    background: var(--color-overlay);
+    animation: gd-fade-in var(--duration-base) var(--ease-standard);
+  }
+}
+
+/* ---- Page containers ---- */
+.gd-page-container {
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+}
+
+.gd-page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+/* ---- Responsive grid for stat / summary cards ---- */
+.gd-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
+  gap: var(--card-gap);
+  margin-bottom: var(--space-6);
+}
+
+/* ---- Responsive grid for entity cards (users, repos) ---- */
+.gd-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-min-width), 1fr));
+  gap: var(--card-gap);
+}
+
+/* ---- Responsive table wrapper: scroll horizontally instead of
+   squeezing columns or breaking the shell width ---- */
+.gd-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---- Two-pane layouts (e.g. compare users, repo details sidebar) ---- */
+.gd-split-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+@media (max-width: 991.98px) {
+  .gd-split-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Side-by-side comparison layout (Compare Users) ---- */
+.gd-compare-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+@media (max-width: 767.98px) {
+  .gd-compare-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Page transitions: fade + subtle rise, no layout shift ----
+   Applied by the route-level Suspense/transition wrapper in the router. */
+.gd-page-transition {
+  animation: gd-page-enter var(--duration-page) var(--ease-out) both;
+}
+
+@keyframes gd-page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gd-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

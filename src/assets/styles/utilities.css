@@ -1,0 +1,128 @@
+/* ==========================================================================
+   Atomic utility classes, all token-driven. Prefer Bootstrap's own
+   utilities (d-flex, justify-content-*, container/row/col, d-none-md, …)
+   for pure structure — these fill the gaps Bootstrap can't cover because
+   they're generated from our own design tokens (spacing scale, semantic
+   colors, radii, text sizes) rather than Bootstrap's fixed values.
+   ========================================================================== */
+
+/* ---- Spacing (margin / padding), generated from the --space-* scale ---- */
+.gd-m-0 { margin: var(--space-0) !important; }
+.gd-m-1 { margin: var(--space-1) !important; }
+.gd-m-2 { margin: var(--space-2) !important; }
+.gd-m-3 { margin: var(--space-3) !important; }
+.gd-m-4 { margin: var(--space-4) !important; }
+.gd-m-5 { margin: var(--space-5) !important; }
+.gd-m-6 { margin: var(--space-6) !important; }
+
+.gd-mt-0 { margin-top: var(--space-0) !important; }
+.gd-mt-1 { margin-top: var(--space-1) !important; }
+.gd-mt-2 { margin-top: var(--space-2) !important; }
+.gd-mt-3 { margin-top: var(--space-3) !important; }
+.gd-mt-4 { margin-top: var(--space-4) !important; }
+.gd-mt-6 { margin-top: var(--space-6) !important; }
+
+.gd-mb-0 { margin-bottom: var(--space-0) !important; }
+.gd-mb-1 { margin-bottom: var(--space-1) !important; }
+.gd-mb-2 { margin-bottom: var(--space-2) !important; }
+.gd-mb-3 { margin-bottom: var(--space-3) !important; }
+.gd-mb-4 { margin-bottom: var(--space-4) !important; }
+.gd-mb-6 { margin-bottom: var(--space-6) !important; }
+
+.gd-p-0 { padding: var(--space-0) !important; }
+.gd-p-1 { padding: var(--space-1) !important; }
+.gd-p-2 { padding: var(--space-2) !important; }
+.gd-p-3 { padding: var(--space-3) !important; }
+.gd-p-4 { padding: var(--space-4) !important; }
+.gd-p-5 { padding: var(--space-5) !important; }
+.gd-p-6 { padding: var(--space-6) !important; }
+
+.gd-gap-1 { gap: var(--space-1) !important; }
+.gd-gap-2 { gap: var(--space-2) !important; }
+.gd-gap-3 { gap: var(--space-3) !important; }
+.gd-gap-4 { gap: var(--space-4) !important; }
+.gd-gap-6 { gap: var(--space-6) !important; }
+
+/* ---- Typography ---- */
+.gd-text-xs { font-size: var(--text-xs) !important; }
+.gd-text-sm { font-size: var(--text-sm) !important; }
+.gd-text-base { font-size: var(--text-base) !important; }
+.gd-text-lg { font-size: var(--text-lg) !important; }
+.gd-text-xl { font-size: var(--text-xl) !important; }
+.gd-text-2xl { font-size: var(--text-2xl) !important; }
+
+.gd-fw-normal { font-weight: var(--font-weight-normal) !important; }
+.gd-fw-medium { font-weight: var(--font-weight-medium) !important; }
+.gd-fw-semibold { font-weight: var(--font-weight-semibold) !important; }
+.gd-fw-bold { font-weight: var(--font-weight-bold) !important; }
+
+.gd-text-mono { font-family: var(--font-mono) !important; }
+
+/* ---- Semantic text colors (distinct from Bootstrap's .text-*) ---- */
+.gd-text-primary { color: var(--color-primary) !important; }
+.gd-text-secondary { color: var(--color-text-secondary) !important; }
+.gd-text-muted { color: var(--color-text-muted) !important; }
+.gd-text-success { color: var(--color-success) !important; }
+.gd-text-warning { color: var(--color-warning) !important; }
+.gd-text-danger { color: var(--color-danger) !important; }
+
+.gd-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gd-line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.gd-line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---- Surfaces & borders ---- */
+.gd-bg-surface { background-color: var(--color-surface) !important; }
+.gd-bg-elevated { background-color: var(--color-bg-elevated) !important; }
+.gd-border { border: 1px solid var(--color-border) !important; }
+.gd-border-0 { border: none !important; }
+.gd-rounded-sm { border-radius: var(--radius-sm) !important; }
+.gd-rounded-md { border-radius: var(--radius-md) !important; }
+.gd-rounded-lg { border-radius: var(--radius-lg) !important; }
+.gd-rounded-full { border-radius: var(--radius-full) !important; }
+
+.gd-shadow-sm { box-shadow: var(--shadow-sm) !important; }
+.gd-shadow-md { box-shadow: var(--shadow-md) !important; }
+.gd-shadow-lg { box-shadow: var(--shadow-lg) !important; }
+.gd-shadow-none { box-shadow: none !important; }
+
+/* ---- Sizing helpers ---- */
+.gd-icon-sm { width: var(--icon-size-sm); height: var(--icon-size-sm); }
+.gd-icon-md { width: var(--icon-size-md); height: var(--icon-size-md); }
+.gd-icon-lg { width: var(--icon-size-lg); height: var(--icon-size-lg); }
+.gd-icon-xl { width: var(--icon-size-xl); height: var(--icon-size-xl); }
+
+.gd-w-full { width: 100% !important; }
+.gd-h-full { height: 100% !important; }
+.gd-min-w-0 { min-width: 0 !important; }
+.gd-max-w-input { max-width: 16rem !important; }
+.gd-max-w-select { max-width: 12rem !important; }
+.gd-max-w-token { max-width: 24rem !important; width: 100%; }
+
+/* ---- Interaction ---- */
+.gd-clickable {
+  cursor: pointer;
+}
+
+.gd-transition {
+  transition: var(--transition-base);
+}
+
+/* ---- Animation utility (mount-in) ---- */
+.gd-fade-in {
+  animation: gd-fade-in var(--duration-base) var(--ease-standard);
+}

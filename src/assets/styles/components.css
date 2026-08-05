@@ -1,0 +1,434 @@
+/* ==========================================================================
+   Shared component-level styles consumed across many feature components.
+   These are our own themed primitives (prefixed `gd-`) that sit alongside
+   Bootstrap's grid/utility classes — never redefine a bare Bootstrap
+   class name here (`.card`, `.badge`, `.btn`, …) to avoid cascade fights.
+
+   The one deliberate exception is the "Bootstrap accent integration" block
+   below: Bootstrap 5.3 bakes literal hex values into each component's own
+   --bs-btn-* custom properties at build time rather than referencing
+   --bs-primary, so our accent picker would silently have no effect on raw
+   `.btn-primary` / `.form-check-input:checked` elements without this.
+   ========================================================================== */
+
+/* ---- Bootstrap accent integration (see file header note) ---- */
+.btn-primary {
+  --bs-btn-bg: var(--color-primary);
+  --bs-btn-border-color: var(--color-primary);
+  --bs-btn-hover-bg: var(--color-primary-hover);
+  --bs-btn-hover-border-color: var(--color-primary-hover);
+  --bs-btn-active-bg: var(--color-primary-hover);
+  --bs-btn-active-border-color: var(--color-primary-hover);
+  --bs-btn-disabled-bg: var(--color-primary);
+  --bs-btn-disabled-border-color: var(--color-primary);
+}
+.form-check-input:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* ---- Surface / Card ---- */
+.gd-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-base);
+}
+
+.gd-card--interactive {
+  cursor: pointer;
+}
+
+.gd-card--interactive:hover,
+.gd-card--interactive:focus-visible {
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.gd-card-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-1);
+}
+
+.gd-card-subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* ---- Stat card ---- */
+.gd-stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  box-shadow: var(--shadow-sm);
+}
+
+.gd-stat-card__label {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+}
+
+.gd-stat-card__value {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-tight);
+}
+
+.gd-stat-card__icon {
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-subtle);
+  color: var(--color-primary);
+}
+
+/* ---- Avatar ---- */
+.gd-avatar {
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-hover);
+  flex-shrink: 0;
+}
+.gd-avatar--sm {
+  width: var(--avatar-size-sm);
+  height: var(--avatar-size-sm);
+}
+.gd-avatar--md {
+  width: var(--avatar-size-md);
+  height: var(--avatar-size-md);
+}
+.gd-avatar--lg {
+  width: var(--avatar-size-lg);
+  height: var(--avatar-size-lg);
+}
+.gd-avatar--xl {
+  width: var(--avatar-size-xl);
+  height: var(--avatar-size-xl);
+}
+
+/* ---- Badge ---- */
+.gd-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  padding: 0.2em 0.65em;
+  border-radius: var(--radius-full);
+  line-height: var(--leading-normal);
+  white-space: nowrap;
+}
+.gd-badge--neutral {
+  background: var(--color-surface-active);
+  color: var(--color-text-secondary);
+}
+.gd-badge--primary {
+  background: var(--color-primary-subtle);
+  color: var(--color-primary);
+}
+.gd-badge--success {
+  background: var(--color-success-subtle);
+  color: var(--color-success);
+}
+.gd-badge--warning {
+  background: var(--color-warning-subtle);
+  color: var(--color-warning);
+}
+.gd-badge--danger {
+  background: var(--color-danger-subtle);
+  color: var(--color-danger);
+}
+
+/* ---- Language dot (used next to repo language name) ---- */
+.gd-lang-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ---- Buttons that layer on top of Bootstrap's .btn ---- */
+.gd-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-height-sm);
+  height: var(--control-height-sm);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  transition: var(--transition-base);
+}
+.gd-btn-icon:hover,
+.gd-btn-icon:focus-visible {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+/* ---- Skeleton loading placeholders ---- */
+.gd-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface-hover);
+  border-radius: var(--radius-md);
+  color: transparent;
+}
+.gd-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-surface-active),
+    transparent
+  );
+  animation: gd-shimmer 1.4s infinite;
+}
+@keyframes gd-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ---- Full-screen loading overlay ----
+   Rendered only after a `loaderDelay` (see --loader-delay) has elapsed,
+   so fast requests never flash a spinner. */
+.gd-loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-loader);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-overlay);
+  backdrop-filter: blur(2px);
+  animation: gd-fade-in var(--duration-base) var(--ease-standard);
+}
+
+.gd-spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 3px solid var(--color-surface);
+  border-top-color: var(--color-primary);
+  animation: gd-spin 0.7s linear infinite;
+}
+
+.gd-spinner--inline {
+  width: 18px;
+  height: 18px;
+  border-width: 2px;
+  display: inline-block;
+}
+
+@keyframes gd-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---- Empty / Error state ---- */
+.gd-state-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--space-3);
+  padding: var(--space-12) var(--space-6);
+  color: var(--color-text-secondary);
+}
+
+.gd-state-panel__icon {
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
+  color: var(--color-text-muted);
+}
+
+.gd-state-panel--error .gd-state-panel__icon {
+  color: var(--color-danger);
+}
+
+/* ---- Chart container: fixed aspect ratio to prevent CLS while data loads ---- */
+.gd-chart-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+/* ---- Breadcrumb ---- */
+.gd-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+.gd-breadcrumb a {
+  color: var(--color-text-secondary);
+}
+.gd-breadcrumb__separator {
+  color: var(--color-text-muted);
+}
+.gd-breadcrumb__current {
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ---- Pagination ---- */
+.gd-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+.gd-pagination__btn {
+  min-width: var(--control-height-sm);
+  height: var(--control-height-sm);
+  padding-inline: var(--space-2);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  transition: var(--transition-base);
+}
+.gd-pagination__btn:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+}
+.gd-pagination__btn:disabled {
+  opacity: 0.5;
+}
+.gd-pagination__btn--active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+.gd-pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--control-height-sm);
+  height: var(--control-height-sm);
+  color: var(--color-text-muted);
+}
+
+/* ---- Theme switcher ---- */
+.gd-theme-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+.gd-theme-switcher__option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-full);
+  color: var(--color-text-muted);
+  transition: var(--transition-base);
+}
+.gd-theme-switcher__option--active {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+/* ---- Sidebar nav links ---- */
+.gd-nav-link {
+  color: var(--color-text-secondary);
+}
+.gd-nav-link:hover,
+.gd-nav-link:focus-visible {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+.gd-nav-link--active {
+  background: var(--color-primary-subtle);
+  color: var(--color-primary);
+}
+
+/* ---- Accent color swatch (Settings) ---- */
+.gd-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+.gd-swatch--active {
+  border-color: var(--color-text);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---- Compare table winner highlight ---- */
+.gd-compare-winner {
+  color: var(--color-success);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ---- Search bar ---- */
+.gd-search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.gd-navbar-search {
+  max-width: var(--search-bar-max-width);
+}
+.gd-page-search {
+  max-width: calc(var(--search-bar-max-width) * 1.6);
+}
+.gd-search-bar input {
+  width: 100%;
+  height: var(--control-height-md);
+  padding-inline: var(--space-10) var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  transition: var(--transition-base);
+}
+.gd-search-bar input:focus-visible {
+  border-color: var(--color-primary);
+}
+.gd-search-bar__icon {
+  position: absolute;
+  left: var(--space-3);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+.gd-search-bar__clear {
+  position: absolute;
+  right: var(--space-2);
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+}
