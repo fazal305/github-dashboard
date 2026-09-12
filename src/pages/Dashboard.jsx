@@ -34,6 +34,7 @@ function Dashboard() {
     data: trendingData,
     error: trendingError,
     isLoading: isTrendingLoading,
+    loadingMessage: trendingLoadingMessage,
     refetch: refetchTrending,
   } = useGitHubApi(
     (signal) => githubApi.searchRepositories(trendingQuery(), { sort: 'stars', order: 'desc', perPage: 6 }, signal),
@@ -123,7 +124,7 @@ function Dashboard() {
         </div>
         {isTrendingLoading ? (
           <div className="gd-card d-flex justify-content-center">
-            <Loader fullScreen={false} />
+            <Loader fullScreen={false} visibleMessage={trendingLoadingMessage} />
           </div>
         ) : trendingError ? (
           <div className="gd-card">

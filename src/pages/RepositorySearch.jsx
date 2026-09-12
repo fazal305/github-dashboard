@@ -69,7 +69,7 @@ function RepositorySearch() {
 
   const finalQuery = buildSearchQuery({ text: urlQuery, language, minStars });
 
-  const { data, error, isLoading, refetch } = useGitHubApi(
+  const { data, error, isLoading, loadingMessage, refetch } = useGitHubApi(
     (signal) =>
       githubApi.searchRepositories(finalQuery, { page: pagination.currentPage, perPage: pagination.perPage, sort: sort || undefined }, signal),
     [finalQuery, sort, pagination.currentPage],
@@ -164,7 +164,7 @@ function RepositorySearch() {
         </div>
       ) : isLoading ? (
         <div className="gd-card d-flex justify-content-center">
-          <Loader fullScreen={false} />
+          <Loader fullScreen={false} visibleMessage={loadingMessage} />
         </div>
       ) : error ? (
         <div className="gd-card">

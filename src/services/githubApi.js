@@ -26,6 +26,20 @@ export function getLastRateLimitInfo() {
   return lastRateLimitInfo;
 }
 
+// Lightweight observability hook so UI code can surface "still loading, retrying…"
+// feedback. This does not affect retry/backoff decisions in any way — it only
+// notifies listeners when a retry is about to happen.
+const retryListeners = new Set();
+
+function notifyRetry(info) {
+  retryListeners.forEach((listener) => listener(info));
+}
+
+export function onRetry(listener) {
+  retryListeners.add(listener);
+  return () => retryListeners.delete(listener);
+}
+
 export function getToken() {
   return getItem(STORAGE_KEYS.GITHUB_TOKEN, '');
 }
@@ -114,6 +128,7 @@ async function request(path, { signal, params, ...fetchOptions } = {}) {
 
         if (isRetryableStatus(response.status) && attempt < MAX_RETRIES) {
           lastError = error;
+          notifyRetry({ attempt: attempt + 1, maxRetries: MAX_RETRIES });
           await delay(RETRY_BASE_DELAY_MS * 2 ** attempt);
           continue;
         }
@@ -133,6 +148,7 @@ async function request(path, { signal, params, ...fetchOptions } = {}) {
       });
 
       if (attempt < MAX_RETRIES) {
+        notifyRetry({ attempt: attempt + 1, maxRetries: MAX_RETRIES });
         await delay(RETRY_BASE_DELAY_MS * 2 ** attempt);
         continue;
       }

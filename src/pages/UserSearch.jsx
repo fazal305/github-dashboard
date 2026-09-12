@@ -32,7 +32,7 @@ function UserSearch() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [urlQuery]);
 
-  const { data, error, isLoading, refetch } = useGitHubApi(
+  const { data, error, isLoading, loadingMessage, refetch } = useGitHubApi(
     (signal) => githubApi.searchUsers(urlQuery, { page: pagination.currentPage, perPage: pagination.perPage }, signal),
     [urlQuery, pagination.currentPage],
     { enabled: urlQuery.trim().length > 0 },
@@ -80,7 +80,7 @@ function UserSearch() {
         </div>
       ) : isLoading ? (
         <div className="gd-card d-flex justify-content-center">
-          <Loader fullScreen={false} />
+          <Loader fullScreen={false} visibleMessage={loadingMessage} />
         </div>
       ) : error ? (
         <div className="gd-card">

@@ -36,7 +36,7 @@ function Repositories() {
     setPage(1);
   }, [activeUser, sort]);
 
-  const { data: repos, error, isLoading, refetch } = useGitHubApi(
+  const { data: repos, error, isLoading, loadingMessage, refetch } = useGitHubApi(
     (signal) => githubApi.getUserRepos(activeUser, { page, perPage, sort }, signal),
     [activeUser, sort, page, perPage],
     { enabled: Boolean(activeUser) },
@@ -132,7 +132,7 @@ function Repositories() {
         </div>
       ) : isLoading ? (
         <div className="gd-card d-flex justify-content-center">
-          <Loader fullScreen={false} />
+          <Loader fullScreen={false} visibleMessage={loadingMessage} />
         </div>
       ) : error ? (
         <div className="gd-card">
